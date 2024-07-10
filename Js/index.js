@@ -1,7 +1,7 @@
 $(".openNav").click(function () {
-  var leftMenu = $("#leftMenu");
-  var homeContent = $("#home-content");
-  var toggleNav = $(this).find(".toggleNav");
+  const leftMenu = $("#leftMenu");
+  const homeContent = $("#home-content");
+  const toggleNav = $(".toggleNav");
 
   if (leftMenu.width() === 0) {
     // Open the menu
@@ -21,35 +21,34 @@ $(".closebtn").click(function () {
   $("#home-content").animate({ marginLeft: "0px" }, 50);
 });
 
-// Smooth scrolling
-$("#leftMenu a").click(function (e) {
-  e.preventDefault();
+//  scrolling
+$("#leftMenu a")
+  .not(".closebtn")
+  .click(function (e) {
+    const sectionId = $(e.target).attr("href");
 
-  var sectionId = $(this).attr("href");
-
-  // Only animate if the href is not just "#"
-  if (sectionId !== "#" && sectionId !== "") {
-    var positionOfSection = $(sectionId).offset().top;
-    $("html, body").animate({ scrollTop: positionOfSection }, 1000);
-  }
-});
+    const sectionOffset = $(sectionId).offset().top;
+    $("html, body").animate({ scrollTop: sectionOffset }, 500);
+  });
 
 // Accordion
-$("#sliderDown .toggle").click(function () {
-  $(".inner").not($(this).next()).slideUp(500);
-  $(this).next().slideToggle(500);
+$("#sliderDown .toggle").click(function (e) {
+  $(".inner").not($(e.target).next()).slideUp(500);
+  $(e.target).next().slideToggle(500);
 });
 
 // Countdown timer
-let targetDate = new Date("Jul 25, 2024 21:00:00").getTime();
+const targetDate = new Date("Dec 25, 2024 21:00:00").getTime();
 setInterval(function () {
-  let now = new Date().getTime();
-  let distance = targetDate - now;
+  const now = new Date().getTime();
+  const distance = targetDate - now;
 
-  let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor(
+    (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
   $(".days").text(days);
   $(".hours").text(hours);
@@ -59,8 +58,8 @@ setInterval(function () {
 
 // Character counter
 $("textarea").keyup(function () {
-  let max = 100;
-  let length = $(this).val().length;
-  let remaining = max - length;
+  const max = 100;
+  const length = $(this).val().length;
+  const remaining = max - length;
   $("#chars").text(remaining);
 });
