@@ -1,7 +1,19 @@
-// Side navigation menu open/close
 $(".openNav").click(function () {
-  $("#leftMenu").animate({ width: "250px" }, 50);
-  $("#home-content").animate({ marginLeft: "250px" }, 50);
+  var leftMenu = $("#leftMenu");
+  var homeContent = $("#home-content");
+  var toggleNav = $(this).find(".toggleNav");
+
+  if (leftMenu.width() === 0) {
+    // Open the menu
+    leftMenu.animate({ width: "250px" }, 50);
+    homeContent.animate({ marginLeft: "250px" }, 50);
+    toggleNav.text("close");
+  } else {
+    // Close the menu
+    leftMenu.animate({ width: "0px" }, 50);
+    homeContent.animate({ marginLeft: "0px" }, 50);
+    toggleNav.text("open");
+  }
 });
 
 $(".closebtn").click(function () {
@@ -18,7 +30,7 @@ $("#leftMenu a").click(function (e) {
   // Only animate if the href is not just "#"
   if (sectionId !== "#" && sectionId !== "") {
     var positionOfSection = $(sectionId).offset().top;
-    $("html, body").animate({ scrollTop: positionOfSection }, 1000); // Duration in milliseconds
+    $("html, body").animate({ scrollTop: positionOfSection }, 1000);
   }
 });
 
